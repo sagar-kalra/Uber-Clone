@@ -8,13 +8,18 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
-export const CurrentLocationButton = function(props) {
+interface MyProps {
+    cb?: Function,
+    bottom?: number
+}
+
+export const CurrentLocationButton = function(props: MyProps) {
     const cb = props.cb ? props.cb : () => console.log("Callback function has not been passed.");
     const bottom = props.bottom ? props.bottom : 65;
 
     return(
         <View style = {[styles.container, {top: HEIGHT - bottom}]}>
-            <Icon
+            <Icon  
             name = 'gps-fixed' 
             size={25}
             onPress={() => { cb() }}

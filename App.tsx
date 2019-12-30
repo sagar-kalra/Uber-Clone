@@ -8,6 +8,17 @@ import { DestinationButton } from './components/DestinationButton';
 import {CurrentLocationButton} from './components/CurrentLocationButton'
 import Driver from './components/Driver'
 
+interface MyState {
+  region: {
+    latitude: number,
+    longitude: number,
+    latitudeDelta: number,
+    longitudeDelta: number
+  }
+}
+
+interface MyProps {}
+
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
@@ -27,9 +38,9 @@ const styles = StyleSheet.create({
   },
 });
 
-class App extends Component {
+class App extends Component<MyProps, MyState> {
 
-  constructor(props) {
+  constructor(props : MyProps) {
     super(props);
     this.state = {
         region: {
@@ -52,7 +63,7 @@ class App extends Component {
             initialRegion={this.state.region}
             showsUserLocation={true}  
         >
-            <Driver driver={{uid: null, location: {
+            <Driver driver={{uid: 'driver 1', location: {
                 latitude: 29.854263,
                 longitude: 77.888000
             } }}/>

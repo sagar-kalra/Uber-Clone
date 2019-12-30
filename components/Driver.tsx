@@ -1,14 +1,30 @@
 import React, { Component } from 'react';
 import {
     Image,
-    View
+    View,
+    Animated
 } from 'react-native';
-import MapView from 'react-native-maps';
+import {AnimatedRegion, MarkerAnimated} from 'react-native-maps';
 
-export default class Driver extends Component {
-    constructor(props) {
+interface MyProps {
+    driver: {
+        uid: string,
+        location: {
+            latitude: number,
+            longitude: number
+        }
+    }
+}
+
+interface MyState extends MyProps {
+    coordinate: AnimatedRegion
+}
+
+export default class Driver extends Component<MyProps, MyState> {
+    marker!: MarkerAnimated | null;
+    constructor(props: MyProps) {
         super(props);
-
+        
         const driver = this.props.driver ?
             this.props.driver :
             {
@@ -19,7 +35,7 @@ export default class Driver extends Component {
                 }
             };
         
-            const coordinate = new MapView.AnimatedRegion({
+            const coordinate = new AnimatedRegion({
                 latitude: driver.location.latitude,
                 longitude: driver.location.longitude,
                 latitudeDelta: 0,
@@ -34,7 +50,7 @@ export default class Driver extends Component {
 
             render() {
                 return(
-                    <MapView.Marker.Animated 
+                    <MarkerAnimated 
                         coordinate={this.state.coordinate}
                         anchor={{x: 0.35, y: 0.32}}
                         ref={marker => { this.marker = marker }}
@@ -47,7 +63,7 @@ export default class Driver extends Component {
                                 height: 32
                             }}
                         />
-                    </MapView.Marker.Animated>
+                    </MarkerAnimated>
                 );
             }
 }

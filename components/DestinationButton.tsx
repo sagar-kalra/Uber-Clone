@@ -10,7 +10,7 @@ import Icon from 'react-native-ionicons'
 
 const WIDTH = Dimensions.get('window').width;
 
-export const DestinationButton = function(props) {
+export const DestinationButton = function() {
     return (
         <TouchableOpacity onPress={() => {}} style = {styles.container}>
             <View style = {styles.leftCol}>
